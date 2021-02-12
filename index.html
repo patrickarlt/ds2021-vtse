@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>Custom Basemaps with Vector Tile Style Editor</title>
+    <title>How to Add and Personalize Esri Basemaps in Your App</title>
 
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/reveal.css" />
@@ -29,7 +29,7 @@
           style="padding-left: 50px"
         >
           <h1 style="text-align: left; font-size: 80px">
-            Custom Basemaps with <br />Vector Tile Style Editor
+            How to Add and Personalize Esri Basemaps in Your App
           </h1>
           <p style="text-align: left; font-size: 30px">Patrick Arlt</p>
           <p style="text-align: left; font-size: 30px">
@@ -155,7 +155,7 @@
           <!-- Pat -->
           ## In ArcGIS Online/Enterprise
 
-          <img src="./img/agol-vtse.png" alt="" style="width: 700px;">
+          <img src="./img/agol-vtse.png" alt="" style="width: 500px;">
 
           <aside class="notes" data-markdown>
             * Start on AGOL item, demo opening in Map Viewer and then VTSE
@@ -314,14 +314,47 @@
 
         <section data-markdown data-background="img/2021/dev-summit/bg-2.png">
           <textarea data-template>
-						<!-- Pat -->
-						## Roadmap
+                    ## Using your custom basemap - ArcGIS JS API
 
-						* Layer management and reordering
-						* Upload custom fonts 
-						* Editing raw JSON 
-					</textarea
-          >
+                    ```js
+                    const vectorTileLayer = new VectorTileLayer({
+                      portalItem: {
+                        id: "6976148c11bd497d8624206f9ee03e30" // Item ID of custom basemap
+                      }
+                    });
+                    
+                    const basemap = new Basemap({
+                      baseLayers: [
+                        vectorTileLayer
+                      ]
+                    });
+                    
+                    const map = new Map({
+                      basemap: basemap,
+                    });
+                    ```
+
+                    https://codepen.io/patrickarlt/pen/oNYBjXb?editors=1000
+                  </textarea>
+
+          <aside class="notes`"></aside>
+        </section>
+
+        <section data-markdown data-background="img/2021/dev-summit/bg-2.png">
+          <textarea data-template>
+                    ## Using your custom basemap - MapBox GL JS
+
+                    ```js
+                    const map = new mapboxgl.Map({
+                      container: "map", // the id of the div element
+                      style: `https://basemaps-api.arcgis.com/arcgis/rest/services/styles/${basemapEnum}?type=style&apiKey=${apiKey}`,
+                      zoom: 12, // starting zoom
+                      center: [-118.805, 34.027] // starting location [longitude, latitude]
+                    });
+                    ```
+
+                    https://codepen.io/patrickarlt/pen/xxRgwEb?editors=100
+                  </textarea>
 
           <aside class="notes`"></aside>
         </section>
